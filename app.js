@@ -11,7 +11,7 @@ var flash=require('connect-flash')
 
 var session = require('express-session');
 var MongoStore = require('connect-mongo')(session);
-var multer = require('multer');
+
 
 
 
@@ -23,17 +23,7 @@ var app = express();
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 app.use(flash())
-var storage = multer.diskStorage({
-  destination:function(req,file,cb){
-    cb(null,'./public/images')
-  },
-  filename:function(req,file,cb){
-    cb(null,file.originalname)
-  }
-});
-var upload = multer({
-  storage:storage
-});
+
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(logger('dev'));
