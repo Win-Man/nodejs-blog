@@ -110,7 +110,7 @@ module.exports = function(app){
       res.redirect('/');
     });
   });
-  app.get('/post',checkLogin);
+  app.get('/post',checkLogin)
   app.get('/post',function(req,res){
     res.render('post',{
       title:'发表',
@@ -344,6 +344,13 @@ module.exports = function(app){
     });
   });
 
+  function checkLogin(req, res, next) {
+    if (!req.session.user) {
+      req.flash('error', '未登录!');
+      res.redirect('/login');
+    }
+    next();
+  }
 
   function checkNotLogin(req,res,next){
     if(req.session.user){
